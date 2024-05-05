@@ -8,18 +8,17 @@
     <string name="child_tickets">Child Tickets</string>
     <string name="number_of_child_tickets">Number of Child Tickets</string>
     <string name="choose_date">Choose Date</string>
-    <string name="date_not_selected">date_not_selected</string>
+    <string name="date_not_selected">Date not selected</string>
     <string name="choose_theater">Choose Theater:</string>
-    <string name="total_price_0">Total Price: $0</string>
     <string name="buy_tickets">Buy Tickets</string>
     <string name="details_will_appear_here">Details will appear here</string>
     <string name="please_select_at_least_one_ticket">Please select at least one ticket.</string>
     <string name="please_choose_a_date">Please choose a date.</string>
     <string name="please_select_a_theater">Please select a theater.</string>
-    <string name="total_price">Total Price:</string>
-    <string name="date">Date:</string>
-    <string name="theater">,Theater:</string>
-    <string name="total_cost">,Total Cost:</string>
-    <string name="order_status_ok">,Order Status: OK</string>
-    <string name="you_have_no_tickets">You have no tickets.</string>
+    <string name="date">Date</string>
+    <string name="theater">Theater</string>
+    <string name="total_cost">Total Cost</string>
+    <string name="order_status_ok">Order Status: OK</string>
+    <string name="you_have_no_tickets">You have no tickets</string>
+    <string name="you_cant_buy_more_than_500_tickets">You can not buy more than 500 tickets</string>
 </resources>

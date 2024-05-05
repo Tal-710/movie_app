@@ -5,6 +5,8 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -54,9 +56,15 @@ class MainActivity : AppCompatActivity() {
     }
     private fun applyTheme(isDarkMode: Boolean) {
         val backgroundColor = if (isDarkMode) Color.BLACK else Color.WHITE
+        val buttonBackgroundColor = if (isDarkMode) Color.WHITE else Color.BLACK
         val textColor = if (isDarkMode) Color.WHITE else Color.BLACK
+        val buttonTextColor = if (isDarkMode) Color.BLACK else Color.WHITE
         findViewById<View>(android.R.id.content).setBackgroundColor(backgroundColor)
-        // Additional theme changes could be added here
+        findViewById<TextView>(R.id.textViewSummary).setTextColor(textColor)
+        findViewById<Button>(R.id.buttonMyTicket).setBackgroundColor(buttonBackgroundColor)
+        findViewById<Button>(R.id.buttonGetTickets).setBackgroundColor(buttonBackgroundColor)
+        findViewById<Button>(R.id.buttonGetTickets).setTextColor(buttonTextColor)
+        findViewById<Button>(R.id.buttonMyTicket).setTextColor(buttonTextColor)
     }
 
 
@@ -75,13 +83,41 @@ class MainActivity : AppCompatActivity() {
         val editTextNumberAdultTickets: EditText = dialog.findViewById(R.id.editTextNumberAdultTickets)
         val editTextNumberChildTickets: EditText = dialog.findViewById(R.id.editTextNumberChildTickets)
         val textViewTotalPrice: TextView = dialog.findViewById(R.id.textViewTotalPrice)
+        val textViewAlert: TextView = dialog.findViewById(R.id.textViewAlert)
         val buttonConfirm: Button = dialog.findViewById(R.id.buttonConfirm)
         val spinnerTheater: Spinner = dialog.findViewById(R.id.spinnerTheater)
+        var totalCost =0
+        var adultTickets =0
+        var childTickets =0
 
         // Start concurrent animations
         editTextNumberAdultTickets.startAnimation(fadeIn)
         editTextNumberChildTickets.startAnimation(fadeIn)
         spinnerTheater.startAnimation(slideUp)
+
+        val updateTotalCost = {
+            adultTickets = editTextNumberAdultTickets.text.toString().toIntOrNull() ?: 0
+            childTickets = editTextNumberChildTickets.text.toString().toIntOrNull() ?: 0
+            totalCost = (adultTickets * 10) + (childTickets * 5) // $10 per adult, $5 per child
+            textViewTotalPrice.text = getString(R.string.total_cost) + ": $$totalCost"
+        }
+
+        editTextNumberAdultTickets.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                updateTotalCost()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        editTextNumberChildTickets.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                updateTotalCost()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
 
         // Setup DatePicker
         buttonChooseDate.setOnClickListener {
@@ -91,58 +127,63 @@ class MainActivity : AppCompatActivity() {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                textViewChosenDate.text = "Date: $selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
+                textViewChosenDate.text = "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
             }, year, month, day)
 
             datePickerDialog.datePicker.minDate = calendar.timeInMillis // Set minimum date to today
             datePickerDialog.show()
         }
 
+
         // Setup Ticket Purchase Logic
         buttonConfirm.setOnClickListener {
-            val adultTickets = editTextNumberAdultTickets.text.toString().toIntOrNull() ?: 0
-            val childTickets = editTextNumberChildTickets.text.toString().toIntOrNull() ?: 0
+            adultTickets = editTextNumberAdultTickets.text.toString().toIntOrNull() ?: 0
+            childTickets = editTextNumberChildTickets.text.toString().toIntOrNull() ?: 0
             val selectedTheater = spinnerTheater.selectedItem?.toString()
-
+            var sum = childTickets + adultTickets
+            if (sum>500){
+                textViewAlert.text = getString(R.string.you_cant_buy_more_than_500_tickets)
+                return@setOnClickListener
+            }
             if (adultTickets == 0 && childTickets == 0) {
-                textViewTotalPrice.text = getString(R.string.please_select_at_least_one_ticket)
+                textViewAlert.text = getString(R.string.please_select_at_least_one_ticket)
                 return@setOnClickListener
             }
 
             if (textViewChosenDate.text.toString() == getString(R.string.date_not_selected)) {
-                textViewTotalPrice.text = getString(R.string.please_choose_a_date)
+                textViewAlert.text = getString(R.string.please_choose_a_date)
                 return@setOnClickListener
             }
 
             if (selectedTheater == null) {
-                textViewTotalPrice.text = getString(R.string.please_select_a_theater)
+                textViewAlert.text = getString(R.string.please_select_a_theater)
                 return@setOnClickListener
             }
-
-            val totalCost = (adultTickets * 10) + (childTickets * 5) // $10 per adult, $5 per child
-            textViewTotalPrice.text = getString(R.string.total_price)+"$totalCost"
-            lastPurchase = getString(R.string.adult_tickets) +"$adultTickets,"+ getString(R.string.child_tickets)+ "$childTickets" + getString(
-                R.string.date
-            ) +"${textViewChosenDate.text}"+ getString(R.string.theater) +"$$selectedTheater"+ getString(
-                R.string.total_cost
-            ) +"$$totalCost "+ getString(R.string.order_status_ok)
+            totalCost = (adultTickets * 10) + (childTickets * 5) // $10 per adult, $5 per child
+            textViewTotalPrice.text = getString(R.string.total_cost)+": $totalCost"
+            lastPurchase = "${getString(R.string.adult_tickets)}: $adultTickets\n" +
+                    "${getString(R.string.child_tickets)}: $childTickets\n" +
+                    "${getString(R.string.date)}: ${textViewChosenDate.text}\n" +
+                    "${getString(R.string.theater)}: $selectedTheater\n" +
+                    "${getString(R.string.total_cost)}: $$totalCost\n" +
+                    getString(R.string.order_status_ok)
 
             dialog.dismiss() // Close the dialog if all conditions are met
         }
 
-        val theaters = arrayOf("Cinimacity", "Yesplanet")
+        val theaters = arrayOf("Cinima-city", "Yes-planet")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, theaters)
         spinnerTheater.adapter = adapter
 
         // Set sequential animation for buttonChooseDate after fadeIn
-        fadeIn.setAnimationListener(object : Animation.AnimationListener {
+        slideUp.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: android.view.animation.Animation?) {}
             override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
             override fun onAnimationEnd(animation: android.view.animation.Animation?) {
-                buttonChooseDate.startAnimation(slideUp)
+                buttonChooseDate.startAnimation(fadeIn)
             }
         })
-        buttonChooseDate.startAnimation(fadeIn)
+        buttonChooseDate.startAnimation(slideUp)
 
 
         dialog.show()
