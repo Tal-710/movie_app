@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My App_Movie</string>
+    <string name="get_tickets">רכוש כרטיסים</string>
+    <string name="my_tickets">הכרטיסים שלי</string>
+    <string name="description">קבוצה מסוכנת של פיראטים, בראשות פיראט אפל במיוחד המכונה קפטן ברברוסה, מאיימת על שלום תושבי האיים הקריביים בסוף המאה ה-17. צעיר נמרץ, שאהובתו נחטפה על ידי הפיראטים, יוצא לחלץ אותה בעזרתו של קפטן ג\'ק ספארו.</string>
+    <string name="adult_tickets">כרטיס למבוגר</string>
+    <string name="number_of_adult_tickets">מספר כרטסים למבוגר</string>
+    <string name="child_tickets">כרטיס לילד</string>
+    <string name="number_of_child_tickets">מספר כרטסים לילד</string>
+    <string name="choose_date">בחר תאריך</string>
+    <string name="date_not_selected">תאריך לא נבחר</string>
+    <string name="choose_theater">בחר בית קולנוע</string>
+    <string name="total_price_0">מחיר מלא: 0$</string>
+    <string name="buy_tickets">קנה כרטיסים</string>
+    <string name="details_will_appear_here">פרטים יופיעו כאן</string>
+    <string name="please_select_at_least_one_ticket">בבקשה בחר לפחות כרטיס אחד</string>
+    <string name="please_choose_a_date">בבקשה בחר תאריך</string>
+    <string name="please_select_a_theater">בבקשה בחר בית קולנוע</string>
+    <string name="total_price">מחיר מלא:</string>
+    <string name="date">,תאריך:</string>
+    <string name="theater">,בית קולנוע</string>
+    <string name="total_cost">מחיר מלא,</string>
+    <string name="order_status_ok">, סטטוס הזמנה: מאושר</string>
+    <string name="you_have_no_tickets">אוי, אין לך כרטיסים!</string>
+</resources>
