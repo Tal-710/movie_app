@@ -23,7 +23,7 @@
             android:id="@+id/editTextNumberAdultTickets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/number_of_adult_tickets"
+            android:hint="@string/adult_price_10"
             android:minHeight="48dp"
             android:inputType="number" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/editTextNumberChildTickets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/number_of_child_tickets"
+            android:hint="@string/child_price_5"
             android:minHeight="48dp"
             android:inputType="number" />
 

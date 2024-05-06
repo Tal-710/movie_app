@@ -3,11 +3,9 @@
     <string name="app_name">My App_Movie</string>
     <string name="get_tickets">רכוש כרטיסים</string>
     <string name="my_tickets">הכרטיסים שלי</string>
-    <string name="description">קבוצה מסוכנת של פיראטים, בראשות פיראט אפל במיוחד המכונה קפטן ברברוסה, מאיימת על שלום תושבי האיים הקריביים בסוף המאה ה-17. צעיר נמרץ, שאהובתו נחטפה על ידי הפיראטים, יוצא לחלץ אותה בעזרתו של קפטן ג\'ק ספארו.</string>
+    <string name="description">שודדי הקאריביים: קבוצה מסוכנת של פיראטים, בראשות פיראט אפל במיוחד המכונה קפטן ברברוסה, מאיימת על שלום תושבי האיים הקריביים בסוף המאה ה-17. צעיר נמרץ, שאהובתו נחטפה על ידי הפיראטים, יוצא לחלץ אותה בעזרתו של קפטן ג\'ק ספארו.</string>
     <string name="adult_tickets">כרטיס למבוגר</string>
-    <string name="number_of_adult_tickets">מספר כרטיסים למבוגר</string>
     <string name="child_tickets">כרטיס לילד</string>
-    <string name="number_of_child_tickets">מספר כרטיסים לילד</string>
     <string name="choose_date">בחר תאריך</string>
     <string name="date_not_selected">תאריך לא נבחר</string>
     <string name="choose_theater">בחר בית קולנוע</string>
@@ -21,5 +19,9 @@
     <string name="total_cost">מחיר מלא</string>
     <string name="order_status_ok">" סטטוס הזמנה: מאושר"</string>
     <string name="you_have_no_tickets">אוי, אין לך כרטיסים!</string>
+    <string name="adult_price_10">מבוגר: 10$</string>
+    <string name="child_price_5">ילד: 5$</string>
     <string name="you_cant_buy_more_than_500_tickets">את.ה לא יכול.ה לקנות יותר מ 500 כרטיסים</string>
+    <string name="like">אהוב</string>
+    <string name="string_liked">אהבת</string>
 </resources>

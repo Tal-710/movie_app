@@ -13,13 +13,16 @@ import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +39,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val buttonGetTickets: Button = findViewById(R.id.buttonGetTickets)
+        val likeButton = findViewById<MaterialButton>(R.id.likeButton)
+        likeButton.setOnClickListener {
+            Toast.makeText(this, getString(R.string.string_liked), Toast.LENGTH_SHORT).show()
+        }
+
+            val buttonGetTickets: Button = findViewById(R.id.buttonGetTickets)
         buttonGetTickets.setOnClickListener {
             showDialog()
         }

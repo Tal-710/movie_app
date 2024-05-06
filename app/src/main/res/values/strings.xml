@@ -2,11 +2,9 @@
     <string name="app_name">My App_Movie</string>
     <string name="get_tickets">Get tickets</string>
     <string name="my_tickets">My tickets</string>
-    <string name="description">A dangerous group of pirates, led by a particularly dark pirate known as Captain Barbarossa, threatens the peace of the inhabitants of the Caribbean islands at the end of the 17th century. An energetic young man, whose beloved has been kidnapped by the pirates, sets out to rescue her with the help of Captain Jack Sparrow.</string>
+    <string name="description">Pirates of the Caribbean: A dangerous group of pirates, led by a particularly dark pirate known as Captain Barbarossa, threatens the peace of the inhabitants of the Caribbean islands at the end of the 17th century. An energetic young man, whose beloved has been kidnapped by the pirates, sets out to rescue her with the help of Captain Jack Sparrow.</string>
     <string name="adult_tickets">Adult Tickets</string>
-    <string name="number_of_adult_tickets">Number of Adult Tickets</string>
     <string name="child_tickets">Child Tickets</string>
-    <string name="number_of_child_tickets">Number of Child Tickets</string>
     <string name="choose_date">Choose Date</string>
     <string name="date_not_selected">Date not selected</string>
     <string name="choose_theater">Choose Theater:</string>
@@ -21,4 +19,8 @@
     <string name="order_status_ok">Order Status: OK</string>
     <string name="you_have_no_tickets">You have no tickets</string>
     <string name="you_cant_buy_more_than_500_tickets">You can not buy more than 500 tickets</string>
+    <string name="adult_price_10">Adult price:10$</string>
+    <string name="child_price_5">Child price:5$</string>
+    <string name="like">Like</string>
+    <string name="string_liked">Liked</string>
 </resources>
