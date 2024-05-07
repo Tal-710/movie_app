@@ -14,6 +14,9 @@
     <string name="please_select_at_least_one_ticket">בבקשה בחר לפחות כרטיס אחד</string>
     <string name="please_choose_a_date">בבקשה בחר תאריך</string>
     <string name="please_select_a_theater">בבקשה בחר בית קולנוע</string>
+    <string name="time">שעה</string>
+    <string name="swap_2_image">החלפת 2 תמונות</string>
+    <string name="please_select_time">בבקשה בחר שעה.</string>
     <string name="date">תאריך</string>
     <string name="theater">בית קולנוע</string>
     <string name="total_cost">מחיר מלא</string>
@@ -23,5 +26,9 @@
     <string name="child_price_5">ילד: 5$</string>
     <string name="you_cant_buy_more_than_500_tickets">את.ה לא יכול.ה לקנות יותר מ 500 כרטיסים</string>
     <string name="like">אהוב</string>
-    <string name="string_liked">אהבת</string>
+    <string name="rating">דירוג</string>
+    <string name="watched_the_movie_rate_it">צפית בסרט? דרג אותו!</string>
+    <string name="rate">דרג</string>
+    <string name="rating_5_10">דירוג 5/10</string>
+    <string name="thanks_for_rating">תודה על הדירוג</string>
 </resources>

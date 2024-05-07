@@ -22,5 +22,12 @@
     <string name="adult_price_10">Adult price:10$</string>
     <string name="child_price_5">Child price:5$</string>
     <string name="like">Like</string>
-    <string name="string_liked">Liked</string>
+    <string name="swap_2_image">swap 2 image</string>
+    <string name="time">Time</string>
+    <string name="please_select_time">Please select Time</string>
+    <string name="rating">Rating</string>
+    <string name="watched_the_movie_rate_it">Watched the movie? Rate it!</string>
+    <string name="rate">Rate</string>
+    <string name="rating_5_10">Rating: 5/10</string>
+    <string name="thanks_for_rating">Thanks for rating</string>
 </resources>
