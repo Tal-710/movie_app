@@ -1,7 +1,6 @@
 package com.example.myapp_movie
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.graphics.Color
@@ -11,11 +10,9 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
@@ -25,13 +22,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.doAfterTextChanged
-import com.google.android.material.button.MaterialButton
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
-    // Variable to store the last purchase details
     private var lastPurchase: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @SuppressLint("SetTextI18n", "DefaultLocale")
+    @SuppressLint("SetTextI18n", "DefaultLocale", "InflateParams")
     private fun showDialog() {
         val dialog = Dialog(this)
         val inflater = layoutInflater
@@ -115,13 +109,12 @@ class MainActivity : AppCompatActivity() {
 
         val timeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, timeOptions)
         timeSpinner.adapter = timeAdapter
-
         timeSpinner.setSelection(0)
 
         val updateTotalCost = {
-            var adultTickets = editTextNumberAdultTickets.text.toString().toIntOrNull() ?: 0
-            var childTickets = editTextNumberChildTickets.text.toString().toIntOrNull() ?: 0
-            var totalCost =
+            val adultTickets = editTextNumberAdultTickets.text.toString().toIntOrNull() ?: 0
+            val childTickets = editTextNumberChildTickets.text.toString().toIntOrNull() ?: 0
+            val totalCost =
                 (adultTickets * 10) + (childTickets * 5) // $10 per adult, $5 per child
             textViewTotalPrice.text = getString(R.string.total_cost) + ": $$totalCost"
         }
@@ -158,14 +151,12 @@ class MainActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-
-        // Setup Ticket Purchase Logic
         buttonConfirm.setOnClickListener {
-            var adultTickets = editTextNumberAdultTickets.text.toString().toIntOrNull() ?: 0
-            var childTickets = editTextNumberChildTickets.text.toString().toIntOrNull() ?: 0
+            val adultTickets = editTextNumberAdultTickets.text.toString().toIntOrNull() ?: 0
+            val childTickets = editTextNumberChildTickets.text.toString().toIntOrNull() ?: 0
             val selectedTheater = spinnerTheater.selectedItem?.toString()
             val selectedTime = timeSpinner.selectedItem?.toString()
-            var sum = childTickets + adultTickets
+            val sum = childTickets + adultTickets
             if (sum>500){
                 textViewAlert.text = getString(R.string.you_cant_buy_more_than_500_tickets)
                 return@setOnClickListener
@@ -187,7 +178,7 @@ class MainActivity : AppCompatActivity() {
                 textViewAlert.text = getString(R.string.please_select_a_theater)
                 return@setOnClickListener
             }
-            var totalCost =
+            val totalCost =
                 (adultTickets * 10) + (childTickets * 5) // $10 per adult, $5 per child
             textViewTotalPrice.text = getString(R.string.total_cost)+": $totalCost"
             lastPurchase = "${getString(R.string.adult_tickets)}: $adultTickets\n" +
@@ -209,9 +200,9 @@ class MainActivity : AppCompatActivity() {
 
         // Set sequential animation for buttonConfirm after fadeIn
         slideUp.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: android.view.animation.Animation?) {}
-            override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
-            override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationRepeat(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
                 buttonConfirm.startAnimation(fadeIn)
             }
         })
@@ -220,7 +211,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "InflateParams")
     private fun showMyTicketsDialog() {
         val dialog = Dialog(this)
         // Use LayoutInflater to inflate the layout
@@ -239,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "InflateParams")
     private fun showRatingDialog() {
         val dialog = Dialog(this)
         val inflater = layoutInflater
