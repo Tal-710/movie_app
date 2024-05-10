@@ -1,5 +1,7 @@
 package com.example.myapp_movie
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -8,7 +10,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @SuppressLint("SetTextI18n", "DefaultLocale", "InflateParams")
+    @SuppressLint("SetTextI18n", "DefaultLocale", "InflateParams", "Recycle")
     private fun showDialog() {
         val dialog = Dialog(this)
         val inflater = layoutInflater
@@ -86,8 +87,7 @@ class MainActivity : AppCompatActivity() {
         dialog.setContentView(dialogView)
 
         // Load animations
-        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
+        val fadeIn = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
 
 
         val buttonChooseDate: Button = dialog.findViewById(R.id.buttonChooseDate)
@@ -99,6 +99,19 @@ class MainActivity : AppCompatActivity() {
         val buttonConfirm: Button = dialog.findViewById(R.id.buttonConfirm)
         val spinnerTheater: Spinner = dialog.findViewById(R.id.spinnerTheater)
         val timeSpinner: Spinner = dialogView.findViewById(R.id.spinnerTime)
+
+        // Object Animator
+        val fadeInAnimator = ObjectAnimator.ofFloat(buttonConfirm, "alpha", 0.1f, 1.0f).apply {
+            duration = 2000
+        }
+        val slideUpAnimator = ObjectAnimator.ofFloat(buttonConfirm, "translationY", 300f, 0f).apply {
+            duration = 1000
+        }
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playSequentially(slideUpAnimator,fadeInAnimator)
+        animatorSet.start()
+
 
         // Start concurrent animations
         editTextNumberAdultTickets.startAnimation(fadeIn)
@@ -198,16 +211,6 @@ class MainActivity : AppCompatActivity() {
         spinnerTheater.adapter = adapter
         spinnerTheater.setSelection(0)
 
-        // Set sequential animation for buttonConfirm after fadeIn
-        slideUp.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {}
-            override fun onAnimationRepeat(animation: Animation?) {}
-            override fun onAnimationEnd(animation: Animation?) {
-                buttonConfirm.startAnimation(fadeIn)
-            }
-        })
-        buttonConfirm.startAnimation(slideUp)
-
         dialog.show()
     }
 
@@ -240,12 +243,12 @@ class MainActivity : AppCompatActivity() {
         val textViewRating = dialogView.findViewById<TextView>(R.id.textViewRating)
 
         // Set initial rating text
-        textViewRating.text = "Rating: ${seekBar.progress}/10"
+        textViewRating.text = getString(R.string.rating)+": ${seekBar.progress}/10"
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 // Update the rating text dynamically as the user slides the seek bar
-                textViewRating.text = "Rating: $progress/10"
+                textViewRating.text = getString(R.string.rating)+": $progress/10"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -258,7 +261,7 @@ class MainActivity : AppCompatActivity() {
 
         dialogView.findViewById<Button>(R.id.buttonSubmitRate).setOnClickListener {
             Toast.makeText(this, getString(R.string.thanks_for_rating), Toast.LENGTH_LONG).show()
-            dialog.dismiss()  // Close the dialog
+            dialog.dismiss()
         }
 
         dialog.show()
